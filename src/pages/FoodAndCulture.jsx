@@ -1,6 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 
+import BookButton from '../components/BookButton';
+import ConfirmModal from '../components/ConfirmModal';
+import toast from 'react-hot-toast';
+
 import seafood from '../assets/seafood.jpg';
 import american from '../assets/american.jpg';
 import panasian from '../assets/pan-asian.jpg';
@@ -85,7 +89,39 @@ export default function FoodAndCulture() {
     },
   ];
 
+  const activities = [
+    {
+      name: 'museum',
+      caption: "Explore Taniti's history at the museum",
+      image: museum,
+      reverse: false,
+      bookable: true,
+    },
+    {
+      name: 'art gallery',
+      caption: 'Admire local artwork at the gallery',
+      image: artGallery,
+      reverse: true,
+      bookable: true,
+    },
+    {
+      name: 'traditional dance',
+      caption: 'Experience vibrant culture through traditional dance',
+      image: dance,
+      reverse: false,
+      bookable: true,
+    },
+  ];
+
   const [selectedCuisine, setSelectedCuisine] = useState(cuisines[0]);
+  const [selectedActivity, setSelectedActivity] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleConfirm = () => {
+    setShowModal(false);
+    toast.success(`Your ${selectedActivity.name} experience is booked!`);
+    setSelectedActivity(null);
+  };
   return (
     <div>
       <section>
@@ -139,44 +175,45 @@ export default function FoodAndCulture() {
           {' '}
           Experience Culture
         </h1>
-        <div className="flex items-center">
-          <div className=" w-1/2 p-2">
-            <img
-              src={museum}
-              className="rounded-lg shadow-lg object-cover w-full h-96"
-            />
-          </div>
-          <h2 className="w-1/2 text-cyan-400 font-extrabold text-xl md:text-3xl p-4">
-            {' '}
-            Explore Taniti's history at the museum
-          </h2>
-        </div>
 
-        <div className="flex items-center flex-row-reverse">
-          <div className="w-1/2 p-2">
-            <img
-              src={artGallery}
-              className="rounded-lg shadow-lg object-cover w-full h-96"
-            />
-          </div>
-          <h2 className="w-1/2 text-cyan-400 font-extrabold text-xl md:text-3xl p-4">
-            {' '}
-            Admire local artwork at the gallery
-          </h2>
-        </div>
-
-        <div className="flex items-center">
-          <div className="w-1/2 p-2">
-            <img
-              src={dance}
-              className="rounded-lg shadow-lg object-cover w-full h-96"
-            />
-          </div>
-          <h2 className="w-1/2 text-cyan-400 font-extrabold text-xl md:text-3xl p-4">
-            Experience vibrant culture through traditional dance
-          </h2>
-        </div>
+        {activities.map((activity) => {
+          return (
+            <div
+              key={activity.name}
+              className={`flex items-center ${
+                activity.reverse ? 'flex-row-reverse' : ''
+              }`}
+            >
+              <div className="w-1/2 p-2">
+                <img
+                  src={activity.image}
+                  className="rounded-lg shadow-lg object-cover w-full h-96"
+                />
+              </div>
+              <div className="w-1/2">
+                <h2 className=" text-cyan-400 font-extrabold text-xl md:text-3xl p-4">
+                  {activity.caption}
+                </h2>
+                <BookButton
+                  name={activity.name}
+                  backgroundColor="bg-orange-400"
+                  onClick={() => {
+                    setShowModal(true);
+                    setSelectedActivity(activity);
+                  }}
+                />
+              </div>
+            </div>
+          );
+        })}
       </section>
+      <ConfirmModal
+        show={showModal}
+        onCancel={() => setShowModal(false)}
+        title="Confirm Booking"
+        message={`Are you sure you want to book ${selectedActivity?.name}?`}
+        onConfirm={handleConfirm}
+      />
     </div>
   );
 }
