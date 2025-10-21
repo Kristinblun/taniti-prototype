@@ -44,7 +44,7 @@ export default function Booking() {
       <section>
         <h1 className="text-4xl md:text-6xl font-extrabold text-cyan-400 text-center my-8">
           {' '}
-          Book Your Tahini Adventure{' '}
+          Book Your Taniti Adventure{' '}
         </h1>
         <div className="flex gap-6">
           {bookingOptions.map((option) => {
