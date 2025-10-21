@@ -35,8 +35,8 @@ export default function Booking() {
 
   const handleConfirm = () => {
     setShowModal(false);
-    setSelected(null);
     toast.success(`You've successfully booked your ${selected.name}`);
+    setSelected(null);
   };
 
   return (
