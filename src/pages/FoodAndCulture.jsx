@@ -197,6 +197,7 @@ export default function FoodAndCulture() {
                 <BookButton
                   name={activity.name}
                   backgroundColor="bg-orange-400"
+                  hoverColor="hover:bg-orange-500"
                   onClick={() => {
                     setShowModal(true);
                     setSelectedActivity(activity);

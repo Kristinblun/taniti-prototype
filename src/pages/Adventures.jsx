@@ -81,6 +81,7 @@ export default function Adventures() {
                   setShowModal(true);
                 }}
                 backgroundColor="bg-cyan-400"
+                hoverColor="hover:bg-cyan-500"
               />
             )}
           </div>
