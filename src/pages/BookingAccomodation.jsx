@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 import ConfirmModal from '../components/ConfirmModal';
 
@@ -12,7 +13,6 @@ import hostel from '../assets/hostel.jpg';
 export default function BookingAccomodation() {
   const [selected, setSelected] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [confirmation, setConfirmation] = useState('');
 
   const accomodations = [
     { name: 'Hotel', image: hotel },
@@ -25,9 +25,7 @@ export default function BookingAccomodation() {
 
   const handleConfirm = () => {
     setShowModal(false);
-    setConfirmation(
-      `You've successfully booked your stay at ${selected.name}!`,
-    );
+    toast.success(`You've successfully booked your stay at ${selected.name}`);
     setSelected(null);
   };
   return (
@@ -35,11 +33,7 @@ export default function BookingAccomodation() {
       <h1 className="text-3xl md:text-4xl font-extrabold text-cyan-400 text-center mt-8 mb-4">
         Book Your Ideal Stay
       </h1>
-      {confirmation && (
-        <p className="text-white font-medium text-center mb-4 bg-green-600/60 p-3">
-          ✅ {confirmation}
-        </p>
-      )}
+
       <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
         {accomodations.map((accomodation) => (
           <div
