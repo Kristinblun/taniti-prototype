@@ -8,7 +8,7 @@ import cruise from '../assets/cruise.jpg';
 
 export default function Home() {
   return (
-    <div className=" p-4">
+    <div className="mt-8">
       <div className="relative">
         <img
           src={beachFeature}

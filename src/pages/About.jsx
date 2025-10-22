@@ -3,7 +3,7 @@ import island from '../assets/island.jpg';
 
 export default function About() {
   return (
-    <div className="p-4">
+    <div className="mt-8">
       <div className="relative">
         <img src={island} className="w-full h-128" />
         <div className="absolute inset-0 flex items-center justify-center">
