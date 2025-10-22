@@ -5,7 +5,7 @@ import ConfirmModal from '../components/ConfirmModal';
 
 import hotel from '../assets/hotelroom.jpg';
 import bedAndBreakfast from '../assets/bedandbreakfast.jpg';
-import beachHouse from '../assets/beachHouse.jpg';
+import beachHouse from '../assets/beachhouse.jpg';
 import privateCondo from '../assets/privatecondo.jpg';
 import privateHome from '../assets/privatehome.jpg';
 import hostel from '../assets/hostel.jpg';
