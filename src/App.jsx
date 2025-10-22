@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  ScrollRestoration,
+} from 'react-router-dom';
+
 import { Toaster } from 'react-hot-toast';
 import './App.css';
 import Home from './pages/Home';
@@ -10,22 +16,35 @@ import FoodAndCulture from './pages/FoodAndCulture';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 
-function App() {
+function RouteLayout() {
   return (
-    <Router>
+    <>
+      <ScrollRestoration />
       <NavBar />
-      <Toaster position="top-center" reverseOrder={false} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/adventures" element={<Adventures />} />
-        <Route path="/foodandculture" element={<FoodAndCulture />} />
-        <Route path="/booking" element={<Booking />} />
-        <Route path="/bookingaccomodation" element={<BookingAccomodation />} />
-      </Routes>
+      <Outlet />
       <Footer />
-    </Router>
+      <Toaster position="top-center" reverseOrder={false} />
+    </>
   );
+}
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RouteLayout />,
+    children: [
+      { path: '/', element: <Home /> },
+      { path: 'about', element: <About /> },
+      { path: 'adventures', element: <Adventures /> },
+      { path: 'foodandculture', element: <FoodAndCulture /> },
+      { path: 'booking', element: <Booking /> },
+      { path: 'bookingaccomodation', element: <BookingAccomodation /> },
+    ],
+  },
+]);
+
+function App() {
+  return <RouterProvider router={router} />;
 }
 
 export default App;
